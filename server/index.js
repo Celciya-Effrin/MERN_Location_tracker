@@ -10,7 +10,13 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+  origin: process.env.REACT_APP_FRONTEND_URL, // Should match frontend domain
+  methods: ['GET', 'POST', 'DELETE', 'PUT'],
+  credentials: true,
+}));
+
 
 // ✅ MongoDB Connection
 mongoose.connect(process.env.MONGO_URL)
@@ -93,8 +99,10 @@ app.get('/api/active-locations', async (req, res) => {
 
 
 // ✅ Start server
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.REACT_APP_BACKEND_URL}`);
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
 

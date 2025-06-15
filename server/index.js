@@ -105,3 +105,8 @@ app.delete('/api/location/:driverId', (req, res) => {
   delete activeLocations[driverId];
   res.json({ message: 'Driver location removed from memory' });
 });
+
+
+app.get("/", (req, res) => {
+  res.send("✅ MERN Billing Backend is running!");
+});

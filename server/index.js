@@ -94,7 +94,7 @@ app.get('/api/active-locations', async (req, res) => {
 
 // ✅ Start server
 app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+  console.log(`Server is running on port ${process.env.REACT_APP_BACKEND_URL}`);
 });
 
 

@@ -14,7 +14,7 @@ const DriverLog = () => {
   const [formData, setFormData] = useState({ name: '', number: '', email: '' });
 
   const fetchDrivers = async () => {
-    const res = await axios.get('http://localhost:3001/api/drivers');
+    const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/drivers`);
     setDrivers(res.data);
   };
 
@@ -23,7 +23,7 @@ const DriverLog = () => {
   }, []);
 
   const handleSubmit = async () => {
-    await axios.post('http://localhost:3001/api/drivers', formData);
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/drivers`, formData);
     setOpen(false);
     setFormData({ name: '', number: '', email: '' });
     fetchDrivers();
@@ -38,7 +38,7 @@ const DriverLog = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (pos) => {
         const { latitude, longitude } = pos.coords;
-        await axios.post('http://localhost:3001/api/location', {
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/location`, {
           driverId: 'DRIV0001', // You should dynamically assign this based on the logged-in driver
           lat: latitude,
           lng: longitude,
@@ -54,7 +54,7 @@ const DriverLog = () => {
   //For LOGOUT button
 const handleLogout = async (driverId) => {
   try {
-    await axios.delete(`http://localhost:3001/api/location/${driverId}`);
+    await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/location/${driverId}`);
     alert('Location tracking stopped.');
 
     // Optional: Trigger map refresh here if you're lifting state or using shared context

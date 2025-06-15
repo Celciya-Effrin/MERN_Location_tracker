@@ -22,7 +22,7 @@ const DriverMap = () => {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const res = await axios.get('http://localhost:3001/api/active-locations');
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/active-locations`);
         setLocations(res.data);
       } catch (error) {
         console.error('Failed to fetch locations:', error);
